@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1370.66666666667,5836</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1370.66666666667,5898</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PullPDF_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -49,7 +49,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="54">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="28">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -80,7 +80,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PullPaperPDF" sap:VirtualizedContainerService.HintSize="1005.33333333333,5771.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PullPaperPDF" sap:VirtualizedContainerService.HintSize="1005.33333333333,5833.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="JournalIssueContentDT" />
       <Variable x:TypeArguments="x:String" Name="FirstChildText" />
@@ -125,31 +125,39 @@
         <InArgument x:TypeArguments="x:Int32">1</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="963.333333333333,5274.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <Assign sap:VirtualizedContainerService.HintSize="963.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_12">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[out_PaperNameLookup]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(Of String, String)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="963.333333333333,5234.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="926.666666666667,5105.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_17">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="926.666666666667,5065.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_17">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder - Volume/Year" sap:VirtualizedContainerService.HintSize="884.666666666667,80.6666666666667" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[String.Format(&quot;{0}\Volume{1}_{2}&quot;, in_RootDirectoryName, Volume, Year)]" />
-          <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="884.666666666667,4688.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+          <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="884.666666666667,4648.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
             <ui:InterruptibleDoWhile.Body>
-              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="848,4519.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_18">
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="848,4479.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_18">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder - Number/Month" sap:VirtualizedContainerService.HintSize="806,80.6666666666667" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[String.Format(&quot;{0}\Volume{1}_{2}\{3}&quot;, in_RootDirectoryName, Volume, Year, Month)]" />
-                <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="806,3900" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[String.Format(&quot;https://www.journals.uchicago.edu/toc/jpe/{0}/{1}/{2}&quot;, Year, Volume, Month)]">
+                <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="806,3860" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[String.Format(&quot;https://www.journals.uchicago.edu/toc/jpe/{0}/{1}/{2}&quot;, Year, Volume, Month)]">
                   <ui:OpenBrowser.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="772,3797.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="772,3757.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -187,14 +195,6 @@
                           </Assign.To>
                           <Assign.Value>
                             <InArgument x:TypeArguments="scg:List(x:String)">[new List(Of String)]</InArgument>
-                          </Assign.Value>
-                        </Assign>
-                        <Assign sap:VirtualizedContainerService.HintSize="730,62" sap2010:WorkflowViewState.IdRef="Assign_10">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[out_PaperNameLookup]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(Of String, String)]</InArgument>
                           </Assign.Value>
                         </Assign>
                         <ui:FindChildren Children="[AllChildren]" DisplayName="Find Children - Unordered List" Filter="&lt;webctrl /&gt;" sap:VirtualizedContainerService.HintSize="730,68" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_CHILDREN">
@@ -451,6 +451,7 @@
                           </ui:ForEach.Body>
                         </ui:ForEach>
                         <ui:CloseTab Browser="{x:Null}" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="730,22" sap2010:WorkflowViewState.IdRef="CloseTab_1" />
+                        <ui:ClearDataTable DataTable="[JournalIssueContentDT]" DisplayName="Clear Data Table - JournalIssueContentDT" sap:VirtualizedContainerService.HintSize="730,22" sap2010:WorkflowViewState.IdRef="ClearDataTable_1" />
                       </Sequence>
                     </ActivityAction>
                   </ui:OpenBrowser.Body>
