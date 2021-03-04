@@ -2,14 +2,16 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_PaperPublicationDateDT" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_PaperNameLookup" Type="InArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,827.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1370.66666666667,827.333333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="31">
+    <scg:List x:TypeArguments="x:String" Capacity="62">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -41,10 +43,12 @@
       <x:String>UiPath.OCR.Activities</x:String>
       <x:String>UiPath.OCR.Contracts.Activities</x:String>
       <x:String>UiPath.Core.Activities.OCR.Engines</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="58">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="31">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -78,13 +82,9 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="376,318" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="376,380" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:Boolean" Name="ImageFound" />
-      <Variable x:TypeArguments="ui:UiElement" Name="FoundImage" />
-      <Variable x:TypeArguments="x:String" Name="FoundImageText" />
-      <Variable x:TypeArguments="ui:Image" Name="Screenshot" />
-      <Variable x:TypeArguments="x:String" Name="FoundElementText" />
+      <Variable x:TypeArguments="x:String" Name="PublicationDateText" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -109,7 +109,11 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_PaperName">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_TransactionItem(&quot;Name&quot;).ToString" />
         </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_PublicationDateText">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="PublicationDateText" />
+        </OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
+    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_PaperNameLookup(in_TransactionItem(&quot;Name&quot;).ToString), CInt(in_TransactionItem(&quot;Volume&quot;)), CInt(in_TransactionItem(&quot;Year&quot;)), CInt(in_TransactionItem(&quot;Month&quot;)), in_TransactionItem(&quot;Name&quot;).ToString, String.Format(&quot;{0}\Volume{1}_{2}\{3}\{4}.pdf&quot;, in_Config(&quot;RootDirectoryName&quot;), in_TransactionItem(&quot;Volume&quot;), in_TransactionItem(&quot;Year&quot;), in_TransactionItem(&quot;Month&quot;), in_TransactionItem(&quot;Name&quot;)), PublicationDateText}]" DataTable="[io_PaperPublicationDateDT]" DisplayName="Add Data Row - PaperPublicationDateDT" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
   </Sequence>
 </Activity>
