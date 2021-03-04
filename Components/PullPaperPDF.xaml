@@ -1,11 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PullPaperPDF" this:PullPaperPDF.in_RootDirectoryName="C:\Users\angel\OneDrive\Desktop\JPE" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PullPaperPDF" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_RootDirectoryName" Type="InArgument(x:String)" />
+    <x:Property Name="out_TransactionData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_PaperNameLookup" Type="OutArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,5511.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1370.66666666667,5836</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PullPDF_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -78,7 +80,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PullPaperPDF" sap:VirtualizedContainerService.HintSize="1005.33333333333,5406.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PullPaperPDF" sap:VirtualizedContainerService.HintSize="1005.33333333333,5771.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="JournalIssueContentDT" />
       <Variable x:TypeArguments="x:String" Name="FirstChildText" />
@@ -98,6 +100,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:BuildDataTable DataTable="[out_TransactionData]" DisplayName="Build Data Table - TransactionData" sap:VirtualizedContainerService.HintSize="963.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Name&quot; msdata:Caption=&quot;&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Volume&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Year&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Month&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Status&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
     <Assign sap:VirtualizedContainerService.HintSize="963.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Int32">[Year]</OutArgument>
@@ -122,31 +125,31 @@
         <InArgument x:TypeArguments="x:Int32">1</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="963.333333333333,5008.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="963.333333333333,5274.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="926.666666666667,4839.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_17">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="926.666666666667,5105.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_17">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder - Volume/Year" sap:VirtualizedContainerService.HintSize="884.666666666667,80.6666666666667" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[String.Format(&quot;{0}\Volume{1}_{2}&quot;, in_RootDirectoryName, Volume, Year)]" />
-          <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="884.666666666667,4422.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+          <ui:InterruptibleDoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="884.666666666667,4688.66666666667" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
             <ui:InterruptibleDoWhile.Body>
-              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="848,4253.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_18">
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="848,4519.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_18">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder - Number/Month" sap:VirtualizedContainerService.HintSize="806,80.6666666666667" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[String.Format(&quot;{0}\Volume{1}_{2}\{3}&quot;, in_RootDirectoryName, Volume, Year, Month)]" />
-                <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="806,3634" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[String.Format(&quot;https://www.journals.uchicago.edu/toc/jpe/{0}/{1}/{2}&quot;, Year, Volume, Month)]">
+                <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="806,3900" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[String.Format(&quot;https://www.journals.uchicago.edu/toc/jpe/{0}/{1}/{2}&quot;, Year, Volume, Month)]">
                   <ui:OpenBrowser.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="772,3531.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="772,3797.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -184,6 +187,14 @@
                           </Assign.To>
                           <Assign.Value>
                             <InArgument x:TypeArguments="scg:List(x:String)">[new List(Of String)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap:VirtualizedContainerService.HintSize="730,62" sap2010:WorkflowViewState.IdRef="Assign_10">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[out_PaperNameLookup]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(Of String, String)]</InArgument>
                           </Assign.Value>
                         </Assign>
                         <ui:FindChildren Children="[AllChildren]" DisplayName="Find Children - Unordered List" Filter="&lt;webctrl /&gt;" sap:VirtualizedContainerService.HintSize="730,68" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_CHILDREN">
@@ -271,33 +282,33 @@
                             </ActivityAction>
                           </ui:ForEach.Body>
                         </ui:ForEach>
-                        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="730,2042.66666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[FreePaperList]">
+                        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="730,2206.66666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[FreePaperList]">
                           <ui:ForEach.Body>
                             <ActivityAction x:TypeArguments="x:String">
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="x:String" Name="paper" />
                               </ActivityAction.Argument>
-                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="656.666666666667,1907.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="656.666666666667,2071.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_16">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[JournalIssueContentDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="614.666666666667,1815.33333333333" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                                <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[JournalIssueContentDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="614.666666666667,1979.33333333333" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
                                   <ui:ForEachRow.Body>
                                     <ActivityAction x:TypeArguments="sd:DataRow">
                                       <ActivityAction.Argument>
                                         <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                                       </ActivityAction.Argument>
-                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="564,1666" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="564,1830" sap2010:WorkflowViewState.IdRef="Sequence_15">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <If Condition="[paper.Contains(row(&quot;Name&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="522,1574" sap2010:WorkflowViewState.IdRef="If_3">
+                                        <If Condition="[paper.Contains(row(&quot;Name&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="522,1738" sap2010:WorkflowViewState.IdRef="If_3">
                                           <If.Then>
-                                            <Sequence DisplayName="Sequence - Save Paper PDF" sap:VirtualizedContainerService.HintSize="376,1423.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                            <Sequence DisplayName="Sequence - Save Paper PDF" sap:VirtualizedContainerService.HintSize="376,1587.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_14">
                                               <sap:WorkflowViewStateService.ViewState>
                                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -310,6 +321,15 @@
                                                   </InArgument>
                                                 </ui:Replace.Replacement>
                                               </ui:Replace>
+                                              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{CleanPaperName, Volume, Year, Month}]" DataTable="[out_TransactionData]" DisplayName="Add Data Row - TransactionData" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                                              <Assign DisplayName="Assign - Paper PDF File Name/Paper Full Name Lookup" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:String">[out_PaperNameLookup(CleanPaperName)]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:String">[row("Name").ToString]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
                                               <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To - Paper PDF Page" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="[&quot;https://www.journals.uchicago.edu&quot; + row(&quot;PDF_URL&quot;).ToString]" />
                                               <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SpecialKey="{x:Null}" Activate="True" DelayBefore="10000" DisplayName="Send Hotkey - Ctrl + P (Print to PDF)" sap:VirtualizedContainerService.HintSize="334,117.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="p" KeyModifiers="Ctrl">
                                                 <ui:SendHotkey.Target>
